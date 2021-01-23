@@ -4,7 +4,7 @@ from pathlib import Path
 from queries import *
 
 config = configparser.ConfigParser()
-config.read('config.cfg')
+config.read_file(open(f"{Path(__file__).parents[0]}/config.cfg"))
 
 class Database:
     def __init__(self):

@@ -1,11 +1,14 @@
 import requests
+from auth import headers
 import json
 
 class Request:
     def __init__(self):
         self._header = headers
+    
+    def get_content(url, param):
+        # we pass whatever param is passed
 
-    def getcontent(url, param):
         response = requests.get(url, headers = headers, params = param)
         if response.status_code == 200:
             return json.loads(response.content)

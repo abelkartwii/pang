@@ -1,7 +1,7 @@
 create_lastfm_schema = """CREATE SCHEMA IF NOT EXISTS lastfm;"""
 
 create_lastfm_table = """
-CREATE TABLE IF NOT EXISTS lastfm.artist (
+CREATE TABLE IF NOT EXISTS lastfm.data (
     id INTEGER PRIMARY KEY,
     mbid VARCHAR(255),
     name TEXT NOT NULL UNIQUE,
@@ -14,5 +14,7 @@ CREATE TABLE IF NOT EXISTS
 """
 
 insert_lastfm_table = """
-INSERT INTO lastfm.
+INSERT INTO lastfm.data
+VALUES ()
+
 """

@@ -25,9 +25,10 @@ Required modules:
 ## Files
 * `auth.py` : configuration variables for initial API request
 * `database.py` : handles connecting to Postgres database and executing queries
+* `lastfm.py` : handles results returned from Last.fm request
 * `main.py` : start here! submits command line arguments
 * `queries.py` : queries for Postgres schema and tables
-* `request.py` : class to make request to the Last.fm API
+* `reqs.py` : class to make request to the Last.fm API
 
 ## To-do
 * host in AWS, create a dashboard
