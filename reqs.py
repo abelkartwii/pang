@@ -8,7 +8,6 @@ class Request:
     
     def get_content(url, param):
         # we pass whatever param is passed
-
         response = requests.get(url, headers = headers, params = param)
         if response.status_code == 200:
             return json.loads(response.content)

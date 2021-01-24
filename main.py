@@ -9,21 +9,28 @@ from database import Database
 config = configparser.ConfigParser()
 config.read_file(open(f"{Path(__file__).parents[0]}/config.cfg"))
 
-parser = argparse.ArgumentParser(description = 'Last.fm tracker based on song, artist, album, and more.')
-
 API_KEY = config['KEYS']['API_KEY']
 API_SECRET = config['KEYS']['API_SECRET']
 
+parser = argparse.ArgumentParser(description = 'Last.fm charts: global and per country.')
+
+def to_string(data):
+    return [str(value) for value in data.values()]
+
 def main():
     args = parser.parse_args()
-    pang = LastFM(song = args.song, artist = args.artist, album = args.album)
+    pang = LastFM(country = args.country, user = args.user)
     db = Database()
     db.setup()
+    queries = [insert_lastfm_table.format(*to_string(result)) for result in pang.get_results()]
+    query_to_execute = "BEGIN; \n" + '\n'.join(queries) + "\nCOMMIT;"
+    db.execute(query_to_execute)
 
 if __name__ == "__main__":
+    parser._action_groups.pop()
     required = parser.add_argument_group('required arguments')
     optional = parser.add_argument_group('optional arguments')
-    required.add_argument("-s", "--song", required = True, help = "Type the song title", nargs = '+')
-    required.add_argument("-a", "--artist", required = True, help = "Type the artist", nargs = '+')
-    optional.add_argument("-al", "--album", required = False)
+    optional.add_argument("-c", "--country", help = "Type the country you wish to retrieve charts from. Leave blank if a global chart is preferred.", nargs = '+')
+    # required.add_argument("-a", "--artist", required = True, help = "Type the artist", nargs = '+')
+    optional.add_argument("-u", "--user", required = False)
     main()

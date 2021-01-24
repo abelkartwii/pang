@@ -8,16 +8,6 @@ from pathlib import Path
 config = configparser.ConfigParser()
 config.read_file(open(f"{Path(__file__).parents[0]}/config.cfg"))
 
-API_KEY = config['KEYS']['API_KEY']
-API_SECRET = config['KEYS']['API_SECRET']
-headers = {'Authorization': API_KEY}
-
-'''
-try:
-    API_KEY = os.environ[""]
-    API_SECRET = os.environ[""]
-except KeyError:
-    API_KEY = "your_key"
-    API_SECRET = "your_secret"
-'''
-# API_URL = 'http://ws.audioscrobbler.com/2.0
+api_key = config['KEYS']['API_KEY']
+api_secret = config['KEYS']['API_SECRET']
+headers = {api_key : api_key}
